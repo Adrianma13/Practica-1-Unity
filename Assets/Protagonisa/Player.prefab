@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 1205575472954647609}
   - component: {fileID: 1632451671162785700}
   - component: {fileID: 2594320930083272955}
+  - component: {fileID: 9089735653221332456}
   - component: {fileID: 6153143646504826156}
+  - component: {fileID: 2629289383448921632}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -28,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5143293467721076871}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.2501287, y: -1.2463005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -73,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1571169023
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 846242102, guid: ead0f5c47e4c6d540a8b013907b91027, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,6 +137,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9089735653221332456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143293467721076871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd4c572912fe764b9e2dec57c9f7285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!114 &6153143646504826156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 702588d124569894d841407173d4b72f, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: e16aa49a2a6adab4fabd0f16f2a7de69, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -174,11 +189,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: c8e239e0-0e01-49a2-bf9e-e472135063db
+    m_ActionId: 35954bb2-c6ac-475f-bfa1-f8889bb21e62
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 2b52b10a-404d-4500-8634-02ede66e6421
+    m_ActionId: 802a924e-f8b6-4dc8-a263-f895d43b122c
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
@@ -194,50 +209,85 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 2bac07a2-c848-4302-bf09-eee9180aa2b5
+    m_ActionId: 23659e50-a62d-40b1-8982-2a91e7addb8d
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: bcdf1da3-f4e8-4efa-9351-0a8dd7e8db1b
+    m_ActionId: 3dca0bd3-939c-4869-a1e9-0c17c89d7182
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 58bea48e-9c3a-4820-97df-4ff0c967f10e
+    m_ActionId: e2518b5a-0f6b-409e-a2b8-a72360d95599
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: a58f98b3-1856-407e-ad64-9302a80fddfa
+    m_ActionId: 6b6ebe8e-99bf-4b14-8c86-5b985258beda
     m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 4fbc4f40-a469-4910-b734-ec6a99fbfa7c
+    m_ActionId: 3cb65339-13c8-4712-a901-8c27f20c6ffc
     m_ActionName: UI/Point[/Mouse/position]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 8dd9c51b-b95f-4fc8-900a-2569a6f7b2ba
+    m_ActionId: e6056a6e-ec3b-4279-9fdb-187ee9f5f166
     m_ActionName: UI/Click[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: f360aaca-4066-4131-9ae8-1047e8ba9c02
+    m_ActionId: 556eee5c-65bf-4678-bd39-0e6f22c112df
     m_ActionName: UI/ScrollWheel[/Mouse/scroll]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: bb944df8-ed35-4243-b1cd-93b325e7bda4
+    m_ActionId: 3e10ca6d-7626-4209-ba13-c958f64558f3
     m_ActionName: UI/MiddleClick[/Mouse/middleButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 9b8162c6-b0e7-4a1b-9542-a9be3f7b428a
+    m_ActionId: 7bb91dd7-f26a-4ec8-9110-95f3de29dbbe
     m_ActionName: UI/RightClick[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 009e22b5-cadc-42a5-9371-b7489f5912c0
+    m_ActionId: cb45d611-1256-463a-9f60-cce1ab9e6940
     m_ActionName: UI/TrackedDevicePosition
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 3ff698cb-46c5-4495-bf63-ecbdd85752d8
+    m_ActionId: 6af0eb45-b78f-4da6-9cb9-40b07eb2197a
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!70 &2629289383448921632
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143293467721076871}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.023232937, y: -0.28653312}
+  m_Size: {x: 0.48954964, y: 0.8612685}
+  m_Direction: 0
