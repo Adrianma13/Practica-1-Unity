@@ -7,24 +7,50 @@ public class Combate : MonoBehaviour
     [SerializeField] private Transform controladorAtaque;
     [SerializeField] private float radioAtaque;
     [SerializeField] private float dañoAtaque;
+    [SerializeField] private float distanciaAtaque = 1.2f; // Qué tan lejos del cuerpo sale el hit
+
+    private Movimiento scriptMovimiento;
+
+    private void Start()
+    {
+        scriptMovimiento = GetComponent<Movimiento>();
+    }
 
     private void Update()
     {
+        // Actualizamos la posición del punto de ataque constantemente
+        ActualizarPosicionAtaque();
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Atacar();
         }
     }
 
+    private void ActualizarPosicionAtaque()
+    {
+        if (controladorAtaque != null && scriptMovimiento != null)
+        {
+            // Calculamos la nueva posición relativa al centro del jugador
+            Vector2 nuevaPosicion = scriptMovimiento.direccionMirado * distanciaAtaque;
+            controladorAtaque.localPosition = new Vector3(nuevaPosicion.x, nuevaPosicion.y, 0);
+        }
+    }
+
     private void Atacar()
     {
+        // Usamos OverlapCircleAll para detectar enemigos
         Collider2D[] colliders = Physics2D.OverlapCircleAll(controladorAtaque.position, radioAtaque);
 
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Enemigo"))
             {
-                collider.GetComponent<Enemigo>().RecibirDaño(dañoAtaque);
+                // Un pequeño consejo: usa TryGetComponent para evitar errores si falta el script
+                if(collider.TryGetComponent<Enemigo>(out Enemigo enemigo))
+                {
+                    enemigo.RecibirDaño(dañoAtaque);
+                }
             }
         }
     }
