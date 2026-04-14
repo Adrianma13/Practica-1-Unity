@@ -47,7 +47,7 @@ public class Combate : MonoBehaviour
             if (collider.CompareTag("Enemigo"))
             {
                 // Un pequeño consejo: usa TryGetComponent para evitar errores si falta el script
-                if(collider.TryGetComponent<Enemigo>(out Enemigo enemigo))
+                if(collider.TryGetComponent<VidaEnemigo>(out VidaEnemigo enemigo))
                 {
                     enemigo.RecibirDaño(dañoAtaque);
                 }
