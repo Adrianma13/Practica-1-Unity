@@ -1,15 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemigo : MonoBehaviour
 {
-    [SerializeField] private float vida = 100f;
+    [Header("Estadísticas")]
+    [SerializeField] private float vidaMaxima = 100f;
+    private float vidaActual;
 
-    public void RecibirDaño(float daño)
+    private Animator animator;
+    private Rigidbody2D rb;
+
+    void Start()
     {
-        vida -= daño;
-        if (vida <= 0)
+        vidaActual = vidaMaxima;
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void RecibirDaño(float cantidad)
+    {
+        vidaActual -= cantidad;
+        Debug.Log("Enemigo recibió daño: " + cantidad + ", Vida restante: " + vidaActual);
+
+        // Lanzamos el Trigger del Animator
+        if (animator != null)
+        {
+            animator.SetTrigger("Hit");
+        }
+
+        if (vidaActual <= 0)
         {
             Morir();
         }
@@ -17,6 +35,8 @@ public class Enemigo : MonoBehaviour
 
     private void Morir()
     {
+        animator.SetTrigger("Muerte");
         Destroy(gameObject);
+        Debug.Log("Enemigo ha muerto.");
     }
 }

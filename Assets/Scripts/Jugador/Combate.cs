@@ -21,7 +21,7 @@ public class Combate : MonoBehaviour
         // Actualizamos la posición del punto de ataque constantemente
         ActualizarPosicionAtaque();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Atacar();
         }
