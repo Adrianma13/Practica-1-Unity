@@ -24,6 +24,10 @@ public class VidaEnemigo : MonoBehaviour
         vidaActual -= daño;
         Debug.Log(gameObject.name + " recibió daño. Vida restante: " + vidaActual);
 
+        if(TryGetComponent<LogicaEnemigo>(out LogicaEnemigo logica))
+        {
+            logica.puedeMoverse = true;
+        }
         // 1. Activar animación de Hit
         if (animator != null)
         {
@@ -46,7 +50,6 @@ public class VidaEnemigo : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("Death");
-            Destroy(gameObject, 1f); // Destruye el objeto después de reproducir la animación
         }
         else
         {

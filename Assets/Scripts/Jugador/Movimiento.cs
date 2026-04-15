@@ -10,6 +10,7 @@ public class Movimiento : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     public Vector2 direccionMirado { get; private set; } // Nueva variable accesible
+    [HideInInspector] public bool puedeMoverse = true;
 
 
     void Start()
@@ -20,13 +21,36 @@ public class Movimiento : MonoBehaviour
     }
 
     void Update()
+{
+    if (puedeMoverse)
     {
         rb.velocity = moveInput * moveSpeed;
+
+        // Si después de un ataque no estás tocando nada, que deje de caminar
+        if (moveInput == Vector2.zero)
+        {
+            animator.SetBool("isWalking", false);
+        }
+        else 
+        {
+            // Si te estás moviendo justo al terminar el ataque, actualiza el Animator
+            animator.SetBool("isWalking", true);
+            animator.SetFloat("InputX", moveInput.x);
+            animator.SetFloat("InputY", moveInput.y);
+        }
     }
+    else
+    {
+        rb.velocity = Vector2.zero;
+    }
+}
 
     public void Move(InputAction.CallbackContext context)
     {
+
         moveInput = context.ReadValue<Vector2>();
+        if (!puedeMoverse) return;
+
 
         if (moveInput != Vector2.zero)
         {
@@ -45,12 +69,11 @@ public class Movimiento : MonoBehaviour
         }
     }
 
-    public void Attack(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            animator.SetTrigger("Attack");
-        }
-    }
+    public void ForzarDesbloqueo()
+{
+    puedeMoverse = true;
+    // Opcional: reiniciar triggers si es necesario
+    animator.ResetTrigger("Attack");
+}
 
 }

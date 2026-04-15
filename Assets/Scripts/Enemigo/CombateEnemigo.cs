@@ -21,6 +21,7 @@ public class CombateEnemigo : MonoBehaviour
 
     void Update()
     {
+        ActualizarPosicionAtaque();
         // El cronómetro siempre baja
         if (cronometroAtaque > 0)
         {
@@ -37,15 +38,31 @@ public class CombateEnemigo : MonoBehaviour
         }
     }
 
+    private void ActualizarPosicionAtaque()
+    {
+        if (controladorAtaque != null && logicaMovimiento != null)
+        {
+            // Calculamos la nueva posición relativa al centro del enemigo
+            Vector2 direccionAtaque = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
+            Vector2 nuevaPosicion = direccionAtaque * radioAtaque;
+            controladorAtaque.localPosition = new Vector3(nuevaPosicion.x, nuevaPosicion.y, 0);
+        }
+    }
+
     private void Atacar()
     {
-        cronometroAtaque = tiempoEntreAtaques;
-        
-        // Activamos la animación de ataque del enemigo
-        animator.SetTrigger("Attack");
+        if (!logicaMovimiento.puedeMoverse) return; // Evitar ataques dobles
 
-        // El daño se hace aquí (o mejor aún, mediante un Animation Event)
-        EjecutarDaño();
+        cronometroAtaque = tiempoEntreAtaques;
+        logicaMovimiento.puedeMoverse = false; // BLOQUEO
+        
+        animator.SetTrigger("Attack");
+    }
+
+// Esta función se llama desde el Animation Event al final de la animación de ataque del enemigo
+    public void FinalizarAtaqueEnemigo()
+    {
+        logicaMovimiento.puedeMoverse = true; // DESBLOQUEO
     }
 
 

@@ -6,6 +6,9 @@ public class LogicaEnemigo : MonoBehaviour
     [SerializeField] private float velocidad = 3f;
     [SerializeField] private float distanciaDeteccion = 10f;
     [SerializeField] private float distanciaAtaque = 1.5f;
+    [HideInInspector] public bool puedeMoverse = true;
+
+
 
     private Transform jugador;
     private Rigidbody2D rb;
@@ -21,8 +24,12 @@ public class LogicaEnemigo : MonoBehaviour
     }
 
     void Update()
-    {
-        if (jugador == null) return;
+    {   
+        if (jugador == null || !puedeMoverse)
+        {
+            direccionMovimiento = Vector2.zero;
+            return;
+        } 
 
         float distanciaAlJugador = Vector2.Distance(transform.position, jugador.position);
 
@@ -38,10 +45,15 @@ public class LogicaEnemigo : MonoBehaviour
             ActualizarAnimaciones(false);
         }
     }
+    
 
-    void FixedUpdate()
+  void FixedUpdate()
     {
-        // Movimiento físico
+        if (!puedeMoverse)
+        {
+            rb.velocity = Vector2.zero; // Freno en seco físico
+            return;
+        }
         rb.MovePosition(rb.position + direccionMovimiento * velocidad * Time.fixedDeltaTime);
     }
 

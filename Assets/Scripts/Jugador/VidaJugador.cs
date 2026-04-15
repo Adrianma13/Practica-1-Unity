@@ -10,36 +10,41 @@ public class VidaJugador : MonoBehaviour
     private Animator animator;
     private bool esInvulnerable = false;
     [SerializeField] private float tiempoInvulnerabilidad = 0.5f;
+    private Movimiento scriptMovimiento;
 
     void Start()
     {
         vidaActual = vidaMaxima;
         animator = GetComponent<Animator>();
+        scriptMovimiento = GetComponent<Movimiento>();
     }
 
     public void TomarDaño(float cantidad)
+{
+    if (esInvulnerable || vidaActual <= 0) return; 
+
+    if (TryGetComponent<Movimiento>(out Movimiento mov))
     {
-        if (esInvulnerable) return; // Evita que un solo ataque golpee múltiples veces
-
-        vidaActual -= cantidad;
-        Debug.Log("Vida del Jugador: " + vidaActual);
-
-        // Disparamos la animación de Hit del jugador
-        if (animator != null)
-        {
-            animator.SetTrigger("Hit");
-        }
-
-        if (vidaActual <= 0)
-        {
-            Morir();
-        }
-        else
-        {
-            // Pequeño tiempo de gracia para no morir instantáneamente
-            StartCoroutine(InvulnerabilidadPostGolpe());
-        }
+        mov.ForzarDesbloqueo();
     }
+
+    vidaActual -= cantidad;
+    Debug.Log(gameObject.name + " recibió daño. Vida restante: " + vidaActual);
+
+    if (vidaActual <= 0)
+    {
+        Morir(); // Llamamos a morir y salimos
+        return; 
+    }
+
+    // Solo disparamos "Hit" si seguimos vivos
+    if (animator != null)
+    {
+        animator.SetTrigger("Hit");
+    }
+
+    StartCoroutine(InvulnerabilidadPostGolpe());
+}
 
     private IEnumerator InvulnerabilidadPostGolpe()
     {
@@ -50,10 +55,20 @@ public class VidaJugador : MonoBehaviour
     }
 
     private void Morir()
+{
+    if (scriptMovimiento != null) scriptMovimiento.enabled = false;
+    
+    // Desactivamos el colisionador para que los enemigos no choquen con el cuerpo
+    if (TryGetComponent<Collider2D>(out Collider2D col))
     {
-        Debug.Log("El jugador ha muerto");
-        // Aquí podrías recargar la escena o mostrar pantalla de Game Over
-        animator.SetTrigger("Muerte");
-        Destroy(gameObject, 1f); // Destruye el objeto después de 1 segundo para que se vea la animación
+        col.enabled = false;
     }
+
+    if (animator != null)
+    {
+        animator.SetTrigger("Death");
+    }
+
+    Destroy(gameObject, 1f); 
+}
 }
