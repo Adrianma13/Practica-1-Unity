@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
-  public GameObject pauseMenu;
-  
+    public GameObject pauseMenu;
+
     public GameObject mainMenu;
     public GameObject optionsMenu;
-  public bool isPaused = false;
+    public bool isPaused = false;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-        if (isPaused)
-        {
-            Reanudar();
-        }
-        else
-        {
-            Pausar();
-        }
+            if (isPaused)
+            {
+                Reanudar();
+            }
+            else
+            {
+                Pausar();
+            }
         }
     }
     public void Pausar()
     {
+
         pauseMenu.SetActive(true);
+        ApplySceneIndex();
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -54,4 +56,37 @@ public class Pause : MonoBehaviour
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
     }
+
+    [SerializeField] private Animator anim;
+
+    void Awake()
+    {
+        if (anim == null)
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
+    }
+    void ApplySceneIndex()
+    {
+        if (anim == null)
+        {
+            anim = GetComponentInChildren<Animator>(); // Re-intento por si acaso
+            if (anim == null) return;
+        }
+
+        // VERIFICACIÓN CLAVE: Si el animator no tiene el archivo Controller asignado, salimos para evitar el error
+        if (anim.runtimeAnimatorController == null)
+        {
+            Debug.LogError("El Animator en " + anim.gameObject.name + " no tiene un Animator Controller asignado en el Inspector.");
+            return;
+        }
+
+        SceneManger infoEscena = Object.FindFirstObjectByType<SceneManger>();
+
+        if (infoEscena != null)
+        {
+            anim.SetInteger("SceneIndex", infoEscena.idDePausa);
+        }
+    }
+
 }
