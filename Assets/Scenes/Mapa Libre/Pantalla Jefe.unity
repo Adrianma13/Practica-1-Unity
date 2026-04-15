@@ -256,8 +256,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000023841858, y: 0.08890474}
-  m_Size: {x: 0.77149534, y: 0.81998897}
+  m_Offset: {x: 0.009114027, y: 0.038779497}
+  m_Size: {x: 0.62567663, y: 0.7197385}
   m_Direction: 0
 --- !u!212 &148404794
 SpriteRenderer:
@@ -342,6 +342,7 @@ MonoBehaviour:
   velocidad: 3
   distanciaDeteccion: 10
   distanciaAtaque: 1
+  puedeMoverse: 1
 --- !u!114 &148404798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49238,6 +49239,7 @@ GameObject:
   - component: {fileID: 1275632031}
   - component: {fileID: 1275632030}
   - component: {fileID: 1275632029}
+  - component: {fileID: 1275632037}
   m_Layer: 7
   m_Name: Jugador
   m_TagString: Player
@@ -49295,6 +49297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  puedeMoverse: 1
 --- !u!114 &1275632032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49342,8 +49345,8 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1275632031}
-        m_TargetAssemblyTypeName: Movimiento, Assembly-CSharp
+      - m_Target: {fileID: 1275632029}
+        m_TargetAssemblyTypeName: Combate, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 0
         m_Arguments:
@@ -49460,8 +49463,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.033488035, y: -0.060897708}
-  m_Size: {x: 0.65319777, y: 0.9583328}
+  m_Offset: {x: -0.0187397, y: -0.055981636}
+  m_Size: {x: 0.6237011, y: 0.85018015}
   m_Direction: 0
 --- !u!212 &1275632035
 SpriteRenderer:
@@ -49524,13 +49527,27 @@ Transform:
   m_GameObject: {fileID: 1275632028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.33, y: 3.39, z: 0}
+  m_LocalPosition: {x: 11.84, y: 2.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 32140475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1275632037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275632028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388b4bd26f5d3754497e783cf94a370e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaMaxima: 100
+  tiempoInvulnerabilidad: 0.5
 --- !u!1 &1341532932
 GameObject:
   m_ObjectHideFlags: 0
