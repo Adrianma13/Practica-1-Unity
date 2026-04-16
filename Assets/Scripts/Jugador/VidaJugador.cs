@@ -12,11 +12,14 @@ public class VidaJugador : MonoBehaviour
     [SerializeField] private float tiempoInvulnerabilidad = 0.5f;
     private Movimiento scriptMovimiento;
 
+    [SerializeField] private BarraDeVida barraDeVida;
+
     void Start()
     {
         vidaActual = vidaMaxima;
         animator = GetComponent<Animator>();
         scriptMovimiento = GetComponent<Movimiento>();
+        barraDeVida.InicializarBarraDeVida(vidaActual);
     }
 
     public void TomarDaño(float cantidad)
@@ -29,6 +32,7 @@ public class VidaJugador : MonoBehaviour
     }
 
     vidaActual -= cantidad;
+    barraDeVida.CambiarVidaActual(vidaActual);
     Debug.Log(gameObject.name + " recibió daño. Vida restante: " + vidaActual);
 
     if (vidaActual <= 0)
