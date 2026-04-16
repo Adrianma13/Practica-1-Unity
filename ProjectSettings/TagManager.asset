@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemigo
+  - Configuraciones
+  - Pause
+  - optionsMenu
+  - pauseMenu
+  - mainMenu
   layers:
   - Default
   - TransparentFX
