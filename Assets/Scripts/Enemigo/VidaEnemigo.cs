@@ -1,65 +1,37 @@
 using UnityEngine;
-using System.Collections;
 
 public class VidaEnemigo : MonoBehaviour
 {
-    [Header("Estadísticas")]
     [SerializeField] private float vidaMaxima = 100f;
     private float vidaActual;
-
     private Animator animator;
-    private Rigidbody2D rb;
-    private LogicaEnemigo logicaMovimiento;
+    private MovimientoEnemigo logicaMovimiento;
 
     void Start()
     {
         vidaActual = vidaMaxima;
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        logicaMovimiento = GetComponent<LogicaEnemigo>();
+        logicaMovimiento = GetComponent<MovimientoEnemigo>();
     }
 
-    public void RecibirDaño(float daño)
+    public void RecibirDaño(float cantidad)
     {
-        vidaActual -= daño;
-        Debug.Log(gameObject.name + " recibió daño. Vida restante: " + vidaActual);
+        vidaActual -= cantidad;
+        
+        // Desbloqueamos el movimiento por si el golpe interrumpió un ataque
+        if (logicaMovimiento != null) logicaMovimiento.puedeMoverse = true;
 
-        if(TryGetComponent<LogicaEnemigo>(out LogicaEnemigo logica))
-        {
-            logica.puedeMoverse = true;
-        }
-        // 1. Activar animación de Hit
-        if (animator != null)
-        {
-            animator.SetTrigger("Hit");
-        }
-
-        // 2. Comprobar si ha muerto
-        if (vidaActual <= 0)
-        {
-            Morir();
-        }
+        if (vidaActual <= 0) Morir();
+        else if (animator != null) animator.SetTrigger("Hit");
     }
 
     private void Morir()
     {
-        // Desactivamos la lógica para que no siga atacando mientras muere
         if (logicaMovimiento != null) logicaMovimiento.enabled = false;
+        if (animator != null) animator.SetTrigger("Death");
         
-        // Si tienes animación de muerte:
-        if (animator != null)
-        {
-            animator.SetTrigger("Death");
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    // Se llama desde un Animation Event al final de la animación de muerte
-    public void EventoMuerteFinal()
-    {
-        Destroy(gameObject);
+        // Desactivamos colisiones para que no estorbe el cadáver
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject, 1.5f);
     }
 }
