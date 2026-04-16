@@ -1,79 +1,116 @@
 using UnityEngine;
+using UnityEngine.AI;
 
-public class LogicaEnemigo : MonoBehaviour
+using UnityEngine;
+using UnityEngine.AI;
+
+public class MovimientoEnemigo : MonoBehaviour
 {
-    [Header("Configuración Movimiento")]
-    [SerializeField] private float velocidad = 3f;
-    [SerializeField] private float distanciaDeteccion = 10f;
-    [SerializeField] private float distanciaAtaque = 1.5f;
-    [HideInInspector] public bool puedeMoverse = true;
+    public enum EstadoIA { Patrullando, Persiguiendo, Atacando }
+    
+    [Header("Estado Actual")]
+    public EstadoIA estadoActual = EstadoIA.Patrullando;
 
+    [Header("Configuración IA")]
+    [SerializeField] private float radioDeteccion = 7f;
+    [SerializeField] private float radioAtaque = 1.5f;
+    [SerializeField] private float tiempoEsperaEnPunto = 2f;
+    [SerializeField] private Transform[] puntosPatrulla;
 
+    [HideInInspector] public bool puedeMoverse = true; 
 
+    private NavMeshAgent agente;
     private Transform jugador;
-    private Rigidbody2D rb;
     private Animator animator;
-    private Vector2 direccionMovimiento;
+    private int indicePatrullaActual = 0;
+    private float cronometroEspera;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        agente = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        // Buscamos al jugador por su Tag
         jugador = GameObject.FindGameObjectWithTag("Player").transform;
+
+        agente.updateRotation = false;
+        agente.updateUpAxis = false;
+        
+        if (puntosPatrulla.Length > 0)
+            agente.SetDestination(puntosPatrulla[indicePatrullaActual].position);
     }
 
     void Update()
-    {   
-        if (jugador == null || !puedeMoverse)
-        {
-            direccionMovimiento = Vector2.zero;
+    {
+        if (jugador == null || !puedeMoverse) {
+            DetenerEnemigo();
             return;
-        } 
+        }
 
         float distanciaAlJugador = Vector2.Distance(transform.position, jugador.position);
 
-        // Si está cerca pero no lo suficiente para atacar, lo sigue
-        if (distanciaAlJugador < distanciaDeteccion && distanciaAlJugador > distanciaAtaque)
+        switch (estadoActual)
         {
-            direccionMovimiento = (jugador.position - transform.position).normalized;
-            ActualizarAnimaciones(true);
-        }
-        else
-        {
-            direccionMovimiento = Vector2.zero;
-            ActualizarAnimaciones(false);
-        }
-    }
-    
+            case EstadoIA.Patrullando:
+                LógicaPatrulla();
+                if (distanciaAlJugador < radioDeteccion) estadoActual = EstadoIA.Persiguiendo;
+                break;
 
-  void FixedUpdate()
-    {
-        if (!puedeMoverse)
-        {
-            rb.velocity = Vector2.zero; // Freno en seco físico
-            return;
+            case EstadoIA.Persiguiendo:
+                LógicaPersecucion();
+                if (distanciaAlJugador <= radioAtaque) estadoActual = EstadoIA.Atacando;
+                if (distanciaAlJugador > radioDeteccion) estadoActual = EstadoIA.Patrullando;
+                break;
+
+            case EstadoIA.Atacando:
+                LógicaAtaque();
+                if (distanciaAlJugador > radioAtaque) estadoActual = EstadoIA.Persiguiendo;
+                break;
         }
-        rb.MovePosition(rb.position + direccionMovimiento * velocidad * Time.fixedDeltaTime);
+        ActualizarAnimaciones(agente.velocity.normalized);
     }
 
-    void ActualizarAnimaciones(bool caminando)
-    {
+    void LógicaPatrulla() {
+        agente.isStopped = false;
+        if (!agente.pathPending && agente.remainingDistance < 0.5f) {
+            cronometroEspera += Time.deltaTime;
+            if (cronometroEspera >= tiempoEsperaEnPunto) {
+                indicePatrullaActual = (indicePatrullaActual + 1) % puntosPatrulla.Length;
+                agente.SetDestination(puntosPatrulla[indicePatrullaActual].position);
+                cronometroEspera = 0;
+            }
+        }
+    }
+
+    void LógicaPersecucion() {
+        agente.isStopped = false;
+        agente.SetDestination(jugador.position);
+    }
+
+    void LógicaAtaque() {
+        agente.isStopped = true;
+        // Llama a cualquier script de combate que tenga el enemigo
+        SendMessage("IntentarAtacar", SendMessageOptions.DontRequireReceiver);
+    }
+
+    void DetenerEnemigo() {
+        agente.isStopped = true;
+        ActualizarAnimaciones(Vector2.zero);
+    }
+
+    void ActualizarAnimaciones(Vector2 dir) {
+        bool caminando = dir.magnitude > 0.1f;
         animator.SetBool("isWalking", caminando);
-
-        if (caminando)
-        {
-            // Pasamos los ejes X e Y al Blend Tree para las 8 direcciones
-            animator.SetFloat("InputX", direccionMovimiento.x);
-            animator.SetFloat("InputY", direccionMovimiento.y);
-            
-            // También guardamos la última dirección para el Idle
-            animator.SetFloat("LastInputX", direccionMovimiento.x);
-            animator.SetFloat("LastInputY", direccionMovimiento.y);
+        if (caminando) {
+            animator.SetFloat("InputX", dir.x);
+            animator.SetFloat("InputY", dir.y);
+            animator.SetFloat("LastInputX", dir.x);
+            animator.SetFloat("LastInputY", dir.y);
         }
     }
 
-    public float GetDistanciaAtaque() {
-    return distanciaAtaque;
-}
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radioDeteccion);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radioAtaque);
+    }
 }
