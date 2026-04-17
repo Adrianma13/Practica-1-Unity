@@ -26,4 +26,17 @@ public class CombateSlime : CombateEnemigo
             }
         }
     }
+
+    // Visualización de los puntos de ataque en el editor
+    private void OnDrawGizmosSelected()
+    {
+        if (controladoresAtaque != null)
+        {
+            Gizmos.color = Color.blue;
+            foreach (Transform punto in controladoresAtaque)
+            {
+                Gizmos.DrawWireSphere(punto.position, radioPuntosAbanico);
+            }
+        }
+    }
 }

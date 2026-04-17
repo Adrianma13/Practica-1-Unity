@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-using UnityEngine;
-using UnityEngine.AI;
-
 public class MovimientoEnemigo : MonoBehaviour
 {
     public enum EstadoIA { Patrullando, Persiguiendo, Atacando }

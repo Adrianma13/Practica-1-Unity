@@ -6,7 +6,7 @@ public class BarraDeVida : MonoBehaviour
     private Slider slider;
     private Animator animator;
 
-    private void Start()
+    private void Awake()
     {
         slider = GetComponent<Slider>();
         animator = GetComponent<Animator>();
