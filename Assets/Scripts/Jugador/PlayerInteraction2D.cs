@@ -51,6 +51,15 @@ public class PlayerInteraction2D : MonoBehaviour
             // 4. NUEVO: Cofres
             Cofre cofre = objetoTocado.GetComponent<Cofre>();
             if (cofre != null) cofre.AbrirCofre(this);
+            
+            PuertaFinal final = objetoTocado.GetComponent<PuertaFinal>();
+            if (final != null)
+            {
+                final.TerminarPartida();
+            } else
+            {
+                Debug.Log("No hay nada con lo que interactuar aquí.");
+            }
         }
     }
 
