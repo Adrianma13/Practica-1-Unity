@@ -1,37 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LogicaEntreEscenas : MonoBehaviour
 {
+    public static LogicaEntreEscenas instancia;
 
-  private GameObject player;
-  private float vidaRestante;
-  private void Awake()
-  {
-    var noDrestruir = FindObjectsOfType<LogicaEntreEscenas>();
-   if (noDrestruir.Length > 2)
+    // Guardamos la vida aquí. La inicializamos en -1 para saber si es la primera vez que jugamos.
+    private float vidaGuardada = -1; 
+
+    private void Awake()
     {
-      Destroy(gameObject);
+        if (instancia == null)
+        {
+            instancia = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    DontDestroyOnLoad(gameObject);
-  }
-  void Start()
-  {
-    player = GameObject.FindGameObjectWithTag("Player");
-  }
-  void Update()
-  {
-    
-  }
 
-  private void setVidaRestante(float vida)
-  {
-    vidaRestante = vida;
-  }
+    public void GuardarVida(float vida)
+    {
+        vidaGuardada = vida;
+    }
 
-  private float getVidaRestante()
-  {
-    return vidaRestante;
-  }
+    public float ObtenerVida()
+    {
+        return vidaGuardada;
+    }
 }

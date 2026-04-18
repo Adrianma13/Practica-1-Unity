@@ -10,12 +10,6 @@ public class CerrarOpciones : MonoBehaviour
     public GameObject optionsMenu;
     public GameObject pauseMenu;
 
-    void Start()
-    {
-        mainMenu = GameObject.FindGameObjectWithTag("mainMenu");
-        
-     
-    }
     public  void CerrarMenuOpciones()
     {
         if(SceneManager.GetActiveScene().name == "MenuInicio")
@@ -34,7 +28,11 @@ public class CerrarOpciones : MonoBehaviour
     public void pasarPause(GameObject menu)
     {
         pauseMenu= menu;
-    
+    }
+
+        public void pasarMainmenu(GameObject menu)
+    {
+        mainMenu= menu;
     }
 
     

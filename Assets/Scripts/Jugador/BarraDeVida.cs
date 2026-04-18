@@ -23,9 +23,9 @@ public class BarraDeVida : MonoBehaviour
         animator.SetTrigger("Golpe");
     }
 
-    public void InicializarBarraDeVida(float vidaActual)
+    public void InicializarBarraDeVida(float vidaActual, float vidaMaxima)
     {
-        CambiarVidaMaxima(vidaActual);
+        CambiarVidaMaxima(vidaMaxima);
         CambiarVidaActual(vidaActual);
     }
 }

@@ -6,12 +6,23 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu;
-    public GameObject optionsMenu;
- 
+    public ControladorOpciones optionsMenu;
+
+    public CerrarOpciones cerrarOpciones;
+    
+    void Start()
+    {
+        optionsMenu= GameObject.FindGameObjectWithTag("Configuraciones").GetComponent<ControladorOpciones>();
+        cerrarOpciones = FindObjectOfType<CerrarOpciones>();
+        if (cerrarOpciones != null)
+        {
+            cerrarOpciones.pasarMainmenu(mainMenu);
+        }
+    }
     public void OpenOptionsMenu()
     {
         mainMenu.SetActive(false);
-        optionsMenu.SetActive(true);
+        optionsMenu.menuOpciones.SetActive(true);
     }
 
     public void QuitGame()

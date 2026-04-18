@@ -58,10 +58,16 @@ public class CombateEnemigo : MonoBehaviour
 
     // Se llama desde el Animation Event: "EjecutarDaño"
     public virtual void EjecutarDaño() 
-    {
+    {   
         Collider2D hit = Physics2D.OverlapCircle(controladorAtaque.position, radioAtaque, capaJugador);
-        if (hit != null && hit.TryGetComponent<VidaJugador>(out VidaJugador vida))
-            vida.TomarDaño(daño);
+        if (hit != null)
+        {
+            if (hit.TryGetComponent<VidaJugador>(out VidaJugador vida))
+            {
+                
+                vida.TomarDaño(daño);
+            }
+        }
     }
 
     public void FinalizarAtaqueEnemigo()
