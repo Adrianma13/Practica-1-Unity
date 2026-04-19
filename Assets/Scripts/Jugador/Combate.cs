@@ -58,7 +58,8 @@ public class Combate : MonoBehaviour
     {
         cronometroAtaque = tiempoEntreAtaques; // Reiniciamos el cronómetro
         scriptMovimiento.puedeMoverse = false; // Bloqueamos movimiento
-        animator.SetTrigger("Attack");         // Disparamos animación
+        animator.SetTrigger("Attack");  
+         fuenteAtaque.Play();       // Disparamos animación
 
         // OPCIONAL: Si no usas Animation Events, llama a Atacar() aquí.
         // Pero lo ideal es llamarlo desde la animación (ver abajo).
@@ -104,11 +105,5 @@ public class Combate : MonoBehaviour
 
 
 
-    public void EventoAtaque()
-    {
-        if (fuenteAtaque != null)
-        {
-            fuenteAtaque.Play();
-        }
-    }
+  
 }
