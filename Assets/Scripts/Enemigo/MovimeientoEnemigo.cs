@@ -15,12 +15,14 @@ public class MovimientoEnemigo : MonoBehaviour
     [SerializeField] private Transform[] puntosPatrulla;
 
     [HideInInspector] public bool puedeMoverse = true; 
+    public Vector2 direccionMirado { get; private set; } = Vector2.down;
 
     private NavMeshAgent agente;
     private Transform jugador;
     private Animator animator;
     private int indicePatrullaActual = 0;
     private float cronometroEspera;
+
 
     void Start()
     {
@@ -37,6 +39,11 @@ public class MovimientoEnemigo : MonoBehaviour
 
     void Update()
     {
+        // Actualizamos la dirección hacia la que está mirando el enemigo
+        if (agente.velocity.magnitude > 0.1f)
+        {
+            direccionMirado = agente.velocity.normalized;
+        }
         if (jugador == null || !puedeMoverse) {
             DetenerEnemigo();
             return;

@@ -29,9 +29,13 @@ public class VidaEnemigo : MonoBehaviour
     {
         if (logicaMovimiento != null) logicaMovimiento.enabled = false;
         if (animator != null) animator.SetTrigger("Death");
+        if (TryGetComponent<Collider2D>(out Collider2D col))
+        {
+            col.enabled = false;
+        }
         
         // Desactivamos colisiones para que no estorbe el cadáver
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject, 1f);
     }
 }

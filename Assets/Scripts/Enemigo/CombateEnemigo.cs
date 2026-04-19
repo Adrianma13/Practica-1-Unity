@@ -36,13 +36,10 @@ public class CombateEnemigo : MonoBehaviour
 
     protected void ActualizarPosicionAtaque()
     {
-        if (controladorAtaque != null && jugador != null && logicaMovimiento.puedeMoverse)
+        if (controladorAtaque != null && logicaMovimiento.puedeMoverse)
         {
-            // Calculamos la dirección hacia el jugador
-            Vector2 direccion = (jugador.position - transform.position).normalized;
-            
-            // Colocamos el controlador en esa dirección multiplicado por la distancia
-            controladorAtaque.localPosition = new Vector3(direccion.x * distanciaDelCuerpo, direccion.y * distanciaDelCuerpo, 0);
+            Vector2 nuevaPosicion = logicaMovimiento.direccionMirado * distanciaDelCuerpo;
+            controladorAtaque.localPosition = new Vector3(nuevaPosicion.x, nuevaPosicion.y, 0);
         }
     }
 

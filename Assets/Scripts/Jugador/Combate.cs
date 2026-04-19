@@ -7,6 +7,8 @@ public class Combate : MonoBehaviour
     [SerializeField] private float radioAtaque;
     [SerializeField] private float dañoAtaque;
     [SerializeField] private float distanciaAtaque = 1.2f;
+    [SerializeField] protected float tiempoEntreAtaques = 1.5f;
+    private float cronometroAtaque;
     private bool yaAtacoEnEsteCiclo = false; // Nueva variable de control
     private Movimiento scriptMovimiento;
     private Animator animator;
@@ -19,6 +21,7 @@ public class Combate : MonoBehaviour
 
     private void Update()
     {
+        if (cronometroAtaque > 0) cronometroAtaque -= Time.deltaTime;
         // Solo actualizamos la posición si no estamos bloqueados, 
         // para que el punto de ataque no "baile" durante la animación
         if (scriptMovimiento.puedeMoverse)
@@ -39,11 +42,12 @@ public class Combate : MonoBehaviour
     // ESTA ES LA FUNCIÓN QUE DEBES VINCULAR EN EL PLAYER INPUT COMPONENT
     public void Attack(InputAction.CallbackContext context)
     {
+
         // Solo atacamos cuando se presiona (started o performed), no cuando se suelta
         if (context.performed)
         {
             // Si ya estamos atacando (o bloqueados), no hacer nada
-            if (!scriptMovimiento.puedeMoverse) return;
+            if (!scriptMovimiento.puedeMoverse || cronometroAtaque > 0) return;
             yaAtacoEnEsteCiclo = false; // Reiniciamos el control para este nuevo ataque
             IniciarAtaque();
         }
@@ -51,6 +55,7 @@ public class Combate : MonoBehaviour
 
     private void IniciarAtaque()
     {
+        cronometroAtaque = tiempoEntreAtaques; // Reiniciamos el cronómetro
         scriptMovimiento.puedeMoverse = false; // Bloqueamos movimiento
         animator.SetTrigger("Attack");         // Disparamos animación
         
