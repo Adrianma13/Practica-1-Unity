@@ -178,6 +178,7 @@ MonoBehaviour:
   radioAtaque: 0.7
   "da\xF1oAtaque": 20
   distanciaAtaque: 0.45
+  tiempoEntreAtaques: 1.5
 --- !u!95 &157743243
 Animator:
   serializedVersion: 5
@@ -469,6 +470,7 @@ MonoBehaviour:
   puntoInteraccion: {fileID: 1459018519}
   inventario: []
   controladorConArmadura: {fileID: 9100000, guid: d2a415c6fe36aa24b877e6bed546d71e, type: 2}
+  controladorConArmadura2: {fileID: 9100000, guid: aa685022961857b4fa56102bdcb2232a, type: 2}
 --- !u!1 &257026373
 GameObject:
   m_ObjectHideFlags: 0
@@ -3162,6 +3164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e214ae117f9f6f44aa783a8904dbe8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idArmadura1Guardada: 0
 --- !u!1 &1059649845
 GameObject:
   m_ObjectHideFlags: 3
@@ -53769,7 +53772,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 822655599456739462, guid: 272b352e58d98f04597a4d893431983d, type: 3}
       propertyPath: objetoContenido
-      value: Armadura
+      value: Armadura1
       objectReference: {fileID: 0}
     - target: {fileID: 1598382941222551284, guid: 272b352e58d98f04597a4d893431983d, type: 3}
       propertyPath: m_Name

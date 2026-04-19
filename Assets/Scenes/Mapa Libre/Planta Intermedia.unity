@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: -1639315831, guid: 71257f70133d3c94b9b2b747829bc32a, type: 3}
     - target: {fileID: 822655599456739462, guid: 272b352e58d98f04597a4d893431983d, type: 3}
       propertyPath: objetoContenido
-      value: Armadura
+      value: Armadura2
       objectReference: {fileID: 0}
     - target: {fileID: 1598382941222551284, guid: 272b352e58d98f04597a4d893431983d, type: 3}
       propertyPath: m_Name
@@ -68622,7 +68622,8 @@ MonoBehaviour:
     m_Bits: 512
   puntoInteraccion: {fileID: 1077030389}
   inventario: []
-  controladorConArmadura: {fileID: 9100000, guid: aa685022961857b4fa56102bdcb2232a, type: 2}
+  controladorConArmadura: {fileID: 9100000, guid: d2a415c6fe36aa24b877e6bed546d71e, type: 2}
+  controladorConArmadura2: {fileID: 9100000, guid: aa685022961857b4fa56102bdcb2232a, type: 2}
 --- !u!114 &1058925312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68665,7 +68666,7 @@ Animator:
   m_GameObject: {fileID: 1058925310}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d2a415c6fe36aa24b877e6bed546d71e, type: 2}
+  m_Controller: {fileID: 9100000, guid: aec9c84680aa33f45bee1e382c3a0d81, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -13,6 +13,7 @@ public class PlayerInteraction2D : MonoBehaviour
 
     [Header("Configuración de Armadura")]
     public RuntimeAnimatorController controladorConArmadura; // El nuevo Animator
+    public RuntimeAnimatorController controladorConArmadura2; // El Animator original (opcional, para volver atrás)
 
     private Animator animator;
 
@@ -21,7 +22,11 @@ public class PlayerInteraction2D : MonoBehaviour
         // Obtenemos el componente Animator del jugador
         animator = GetComponent<Animator>();
     }
-
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        CargarArmaduraDesdeManager();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -51,12 +56,13 @@ public class PlayerInteraction2D : MonoBehaviour
             // 4. NUEVO: Cofres
             Cofre cofre = objetoTocado.GetComponent<Cofre>();
             if (cofre != null) cofre.AbrirCofre(this);
-            
+
             PuertaFinal final = objetoTocado.GetComponent<PuertaFinal>();
             if (final != null)
             {
                 final.TerminarPartida();
-            } else
+            }
+            else
             {
                 Debug.Log("No hay nada con lo que interactuar aquí.");
             }
@@ -77,23 +83,34 @@ public class PlayerInteraction2D : MonoBehaviour
     {
         inventario.Add(nombreObjeto);
         Debug.Log("Inventario: Has obtenido " + nombreObjeto);
-        if (nombreObjeto == "Armadura")
+        if (nombreObjeto == "Armadura1")
         {
-            EquiparArmadura();
+            EquiparNuevaArmadura(1);
+        }
+        if (nombreObjeto == "Armadura2")
+        {
+            EquiparNuevaArmadura(2);
         }
     }
-    void EquiparArmadura()
-    {
-        if (controladorConArmadura != null && animator != null)
-        {
-            // Cambiamos el controlador completo por el nuevo
-            animator.runtimeAnimatorController = controladorConArmadura;
-            Debug.Log("¡Animator cambiado! Ahora tienes movimientos de armadura.");
-        }
-    }
+
     // Función para consultar si tenemos algo (útil para puertas con llave)
     public bool TieneObjeto(string nombreObjeto)
     {
         return inventario.Contains(nombreObjeto);
+    }
+    void CargarArmaduraDesdeManager()
+    {
+        if (LogicaEntreEscenas.instancia == null) return;
+
+        int id = LogicaEntreEscenas.instancia.idArmadura1Guardada;
+
+        if (id == 1) animator.runtimeAnimatorController = controladorConArmadura;
+        else if (id == 2) animator.runtimeAnimatorController = controladorConArmadura2;
+        // Si es 0, se queda con el animator normal por defecto
+    }
+    public void EquiparNuevaArmadura(int nuevoId)
+    {
+        LogicaEntreEscenas.instancia.idArmadura1Guardada = nuevoId;
+        CargarArmaduraDesdeManager(); // Aplicar el cambio visualmente
     }
 }

@@ -49671,7 +49671,7 @@ Animator:
   m_GameObject: {fileID: 1275632028}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aa685022961857b4fa56102bdcb2232a, type: 2}
+  m_Controller: {fileID: 9100000, guid: aec9c84680aa33f45bee1e382c3a0d81, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -49966,7 +49966,8 @@ MonoBehaviour:
     m_Bits: 512
   puntoInteraccion: {fileID: 1297067367}
   inventario: []
-  controladorConArmadura: {fileID: 0}
+  controladorConArmadura: {fileID: 9100000, guid: d2a415c6fe36aa24b877e6bed546d71e, type: 2}
+  controladorConArmadura2: {fileID: 9100000, guid: aa685022961857b4fa56102bdcb2232a, type: 2}
 --- !u!1 &1297067366
 GameObject:
   m_ObjectHideFlags: 0

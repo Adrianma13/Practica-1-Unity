@@ -60,5 +60,5 @@
         "Temp/": true,
         ".mule": true
     },
-    "dotnet.defaultSolution": "Practica-1-Unity.sln"
+    "dotnet.defaultSolution": "Practica 1 Tactics.sln"
 }

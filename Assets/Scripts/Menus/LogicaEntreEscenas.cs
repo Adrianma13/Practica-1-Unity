@@ -6,6 +6,7 @@ public class LogicaEntreEscenas : MonoBehaviour
 
     // Guardamos la vida aquí. La inicializamos en -1 para saber si es la primera vez que jugamos.
     private float vidaGuardada = -1; 
+    public int idArmadura1Guardada = 0; // 0 = no tiene, 1 = tiene
 
     private void Awake()
     {
