@@ -11,19 +11,6 @@ public class Cronometro : MonoBehaviour
     public bool cronometroActivo = false;
     public TextMeshProUGUI textoCronometro; 
 
-    void Awake()
-    {
-       
-        if (instancia == null)
-        {
-            instancia = this;
-            DontDestroyOnLoad(gameObject); // El cronómetro sobrevive al cambio de escena
-        }
-        else
-        {
-            Destroy(gameObject); // Si ya existe uno, borramos el nuevo para no duplicar
-        }
-    }
 
     void Start()
     {

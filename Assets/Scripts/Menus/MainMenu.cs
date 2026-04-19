@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,10 +11,11 @@ public class MainMenu : MonoBehaviour
     public ControladorOpciones optionsMenu;
 
     public CerrarOpciones cerrarOpciones;
-    
+    public TextMeshProUGUI textoUiRanking;
+
     void Start()
     {
-        optionsMenu= GameObject.FindGameObjectWithTag("Configuraciones").GetComponent<ControladorOpciones>();
+        optionsMenu = GameObject.FindGameObjectWithTag("Configuraciones").GetComponent<ControladorOpciones>();
         cerrarOpciones = FindObjectOfType<CerrarOpciones>();
         if (cerrarOpciones != null)
         {
@@ -33,6 +36,10 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Pantalla Inicio");
+    }
+    public void OpenRanking()
+    {
+        SceneManager.LoadScene("PantallaRecords");
     }
 
 }

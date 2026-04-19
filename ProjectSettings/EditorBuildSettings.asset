@@ -20,5 +20,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mapa Libre/Planta Intermedia.unity
     guid: d56985582665f45409758292ac76cf18
+  - enabled: 1
+    path: Assets/Scenes/Puntuaciones/PantallaNombre.unity
+    guid: 3b50671ac8ff1db4fbd2cb2772b124f9
+  - enabled: 1
+    path: Assets/Scenes/Puntuaciones/PantallaRecords.unity
+    guid: 0540c01ba4b50a54eb8a95f9ca098361
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a7efb377e0564844e9de504c41176e27, type: 2}

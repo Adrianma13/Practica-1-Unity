@@ -19,6 +19,7 @@ public class Cofre : MonoBehaviour
     {
         if (!estaAbierto)
         {
+            PuntuacionManager.instancia.ModificarPuntos(20f); // Recompensa por abrir el cofre
             estaAbierto = true;
             
             // Le damos al jugador el string que hayamos escrito en el Inspector

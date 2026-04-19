@@ -2390,6 +2390,8 @@ GameObject:
   - component: {fileID: 804219630}
   - component: {fileID: 804219635}
   - component: {fileID: 804219636}
+  - component: {fileID: 804219638}
+  - component: {fileID: 804219637}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -2491,8 +2493,8 @@ RectTransform:
   m_Children:
   - {fileID: 1066757893}
   - {fileID: 1234854764}
-  - {fileID: 443351154}
   - {fileID: 1051380125}
+  - {fileID: 443351154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2525,6 +2527,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombreDeEscenaDestruccion: 
+--- !u!114 &804219637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804219629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3ebad5de0cafd4fba4e8205cb14935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiempoTranscurrido: 0
+  cronometroActivo: 0
+  textoCronometro: {fileID: 1234854762}
+--- !u!114 &804219638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804219629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0fadc4c1d8bb24bba965e755ff02ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puntosActuales: 100
+  textoPuntos: {fileID: 1066757891}
 --- !u!1 &872993297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3072,8 +3103,6 @@ GameObject:
   - component: {fileID: 1051380124}
   - component: {fileID: 1051380126}
   - component: {fileID: 1051380127}
-  - component: {fileID: 1051380128}
-  - component: {fileID: 1051380129}
   m_Layer: 0
   m_Name: ControladorEscena
   m_TagString: Untagged
@@ -3133,35 +3162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e214ae117f9f6f44aa783a8904dbe8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1051380128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051380123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3ebad5de0cafd4fba4e8205cb14935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tiempoTranscurrido: 0
-  cronometroActivo: 0
-  textoCronometro: {fileID: 1234854762}
---- !u!114 &1051380129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051380123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0fadc4c1d8bb24bba965e755ff02ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  puntosActuales: 100
-  textoPuntos: {fileID: 1066757891}
 --- !u!1 &1059649845
 GameObject:
   m_ObjectHideFlags: 3
