@@ -44,7 +44,7 @@ public class MainMenu : MonoBehaviour
     private IEnumerator LoadStartSceneAfterDelay()
     {
         yield return new WaitForSeconds(0.3f);
-        SceneManager.LoadScene("Pantalla Inicio");
+        SceneManager.LoadScene("ConfigNivel");
     }
     public void OpenRanking()
     {

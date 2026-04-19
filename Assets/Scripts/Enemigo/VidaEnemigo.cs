@@ -9,7 +9,14 @@ public class VidaEnemigo : MonoBehaviour
 
     void Start()
     {
+        // Obtenemos el multiplicador (si no existe el singleton, usamos 1 por seguridad)
+        float multiplicador = LogicaEntreEscenas.instancia != null ? LogicaEntreEscenas.instancia.multiplicadorDificultad : 1f;
+
+        // Aplicamos la dificultad a la vida máxima
+        vidaMaxima = vidaMaxima * multiplicador;
         vidaActual = vidaMaxima;
+
+        //vidaActual = vidaMaxima;
         animator = GetComponent<Animator>();
         logicaMovimiento = GetComponent<MovimientoEnemigo>();
     }
