@@ -11,6 +11,8 @@ TagManager:
   - pauseMenu
   - mainMenu
   - Interactuable
+  - Cronometro
+  - Puntuacion
   layers:
   - Default
   - TransparentFX
