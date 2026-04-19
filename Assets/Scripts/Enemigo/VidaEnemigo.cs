@@ -27,6 +27,7 @@ public class VidaEnemigo : MonoBehaviour
 
     private void Morir()
     {
+        PuntuacionManager.instancia.ModificarPuntos(50f); // Recompensa por matar al enemigo
         if (logicaMovimiento != null) logicaMovimiento.enabled = false;
         if (animator != null) animator.SetTrigger("Death");
         if (TryGetComponent<Collider2D>(out Collider2D col))

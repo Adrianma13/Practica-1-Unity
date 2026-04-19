@@ -38,4 +38,8 @@ public class PuntuacionManager : MonoBehaviour
             textoPuntos.text = "Puntos: " + Mathf.FloorToInt(puntosActuales).ToString();
         }
     }
+    public float getPuntos()
+    {
+        return puntosActuales;
+    }
 }

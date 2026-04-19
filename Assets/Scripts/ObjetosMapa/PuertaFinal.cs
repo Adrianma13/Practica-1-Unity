@@ -8,9 +8,12 @@ public class PuertaFinal : MonoBehaviour
     [Header("Configuración")]
     public string nombreEscenaMenu;// El nombre de tu escena de inicio
 
+    // Dentro de PuertaFinal.cs
     public void TerminarPartida()
     {
-        Debug.Log("Partida terminada. Volviendo al menú...");
-        SceneManager.LoadScene(nombreEscenaMenu);
+        if (Cronometro.instancia != null) Cronometro.instancia.cronometroActivo = false;
+
+        // IMPORTANTE: Cargamos la escena del ranking
+        SceneManager.LoadScene("PantallaNombre");
     }
 }
