@@ -19,11 +19,20 @@ public class CombateEnemigo : MonoBehaviour
 
     protected virtual void Start()
     {
+
+        
+
         animator = GetComponent<Animator>();
         logicaMovimiento = GetComponent<MovimientoEnemigo>();
         // Buscamos al jugador una sola vez para ahorrar rendimiento
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) jugador = playerObj.transform;
+
+        // Aplicamos la dificultad al daño
+        if (LogicaEntreEscenas.instancia != null)
+        {
+            daño = daño * LogicaEntreEscenas.instancia.multiplicadorDificultad;
+        }
     }
 
     protected virtual void Update()

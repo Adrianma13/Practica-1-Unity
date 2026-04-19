@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Pantalla Inicio");
+        SceneManager.LoadScene("ConfigNivel");
     }
     public void OpenRanking()
     {
