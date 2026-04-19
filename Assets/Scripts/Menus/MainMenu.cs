@@ -13,6 +13,9 @@ public class MainMenu : MonoBehaviour
     public CerrarOpciones cerrarOpciones;
     public TextMeshProUGUI textoUiRanking;
 
+    public AudioSource sonidoBoton;
+
+
     void Start()
     {
         optionsMenu = GameObject.FindGameObjectWithTag("Configuraciones").GetComponent<ControladorOpciones>();
@@ -35,11 +38,31 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        StartCoroutine(LoadStartSceneAfterDelay());
+    }
+
+    private IEnumerator LoadStartSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("Pantalla Inicio");
     }
     public void OpenRanking()
     {
+        StartCoroutine(LoadRankingSceneAfterDelay());
+    }
+
+    private IEnumerator LoadRankingSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("PantallaRecords");
+    }
+
+    public void ReproducirSonidoBoton()
+    {
+        if (sonidoBoton != null)
+        {
+            sonidoBoton.Play();
+        }
     }
 
 }

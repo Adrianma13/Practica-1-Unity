@@ -21,29 +21,29 @@ public class Movimiento : MonoBehaviour
     }
 
     void Update()
-{
-    if (puedeMoverse)
     {
-        rb.velocity = moveInput * moveSpeed;
+        if (puedeMoverse)
+        {
+            rb.velocity = moveInput * moveSpeed;
 
-        // Si después de un ataque no estás tocando nada, que deje de caminar
-        if (moveInput == Vector2.zero)
-        {
-            animator.SetBool("isWalking", false);
+            // Si después de un ataque no estás tocando nada, que deje de caminar
+            if (moveInput == Vector2.zero)
+            {
+                animator.SetBool("isWalking", false);
+            }
+            else
+            {
+                // Si te estás moviendo justo al terminar el ataque, actualiza el Animator
+                animator.SetBool("isWalking", true);
+                animator.SetFloat("InputX", moveInput.x);
+                animator.SetFloat("InputY", moveInput.y);
+            }
         }
-        else 
+        else
         {
-            // Si te estás moviendo justo al terminar el ataque, actualiza el Animator
-            animator.SetBool("isWalking", true);
-            animator.SetFloat("InputX", moveInput.x);
-            animator.SetFloat("InputY", moveInput.y);
+            rb.velocity = Vector2.zero;
         }
     }
-    else
-    {
-        rb.velocity = Vector2.zero;
-    }
-}
 
     public void Move(InputAction.CallbackContext context)
     {
@@ -55,8 +55,8 @@ public class Movimiento : MonoBehaviour
         if (moveInput != Vector2.zero)
         {
             // Solo actualizamos la dirección si el jugador se está moviendo
-            direccionMirado = moveInput.normalized; 
-            
+            direccionMirado = moveInput.normalized;
+
             animator.SetBool("isWalking", true);
             animator.SetFloat("InputX", moveInput.x);
             animator.SetFloat("InputY", moveInput.y);
@@ -70,10 +70,17 @@ public class Movimiento : MonoBehaviour
     }
 
     public void ForzarDesbloqueo()
-{
-    puedeMoverse = true;
-    // Opcional: reiniciar triggers si es necesario
-    animator.ResetTrigger("Attack");
-}
+    {
+        puedeMoverse = true;
+        // Opcional: reiniciar triggers si es necesario
+        animator.ResetTrigger("Attack");
+    }
+    public void ReproducirPaso()
+    {
+        AudioSource source = GetComponent<AudioSource>();
+        // Añadimos un poco de variación de tono para que no sea monótono
+        source.pitch = Random.Range(0.8f, 1.2f);
+        source.Play();
+    }
 
 }

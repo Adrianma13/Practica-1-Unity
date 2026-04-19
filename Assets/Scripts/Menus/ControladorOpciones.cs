@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControladorOpciones : MonoBehaviour
 {
     public GameObject menuOpciones;
+      public AudioSource sonidoBoton;
 
     // Start is called before the first frame update
     void Start()
@@ -17,4 +18,12 @@ public class ControladorOpciones : MonoBehaviour
     {
         
     }
+    public void ReproducirSonidoBoton()
+    {
+        if (sonidoBoton != null)
+        {
+            sonidoBoton.Play();
+        }
+    }
+   
 }

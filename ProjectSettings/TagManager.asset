@@ -13,6 +13,7 @@ TagManager:
   - Interactuable
   - Cronometro
   - Puntuacion
+  - Musica
   layers:
   - Default
   - TransparentFX

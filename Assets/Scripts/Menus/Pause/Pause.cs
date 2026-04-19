@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -12,13 +13,9 @@ public class Pause : MonoBehaviour
 
     private CerrarOpciones cerrarOpciones;
 
-
-
-
-
     void Start()
     {
-        optionsMenu= GameObject.FindGameObjectWithTag("Configuraciones").GetComponent<ControladorOpciones>();
+        optionsMenu = GameObject.FindGameObjectWithTag("Configuraciones").GetComponent<ControladorOpciones>();
         cerrarOpciones = FindObjectOfType<CerrarOpciones>();
         if (cerrarOpciones != null)
         {
@@ -57,10 +54,15 @@ public class Pause : MonoBehaviour
     }
     public void SalirMenuPrincipal()
     {
-        Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuInicio");
-        isPaused = false;
+        StartCoroutine(SalirMenuPrincipalAfterDelay());
+    }
 
+    private IEnumerator SalirMenuPrincipalAfterDelay()
+    {
+        Time.timeScale = 1f;
+        yield return new WaitForSeconds(0.2f);
+        SceneManager.LoadScene("MenuInicio");
+        isPaused = false;
     }
 
     public void OpenOptionsMenu()

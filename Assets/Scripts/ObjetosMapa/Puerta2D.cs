@@ -15,6 +15,7 @@ public class Puerta2D : MonoBehaviour
     public Sprite spriteAbiertaIzq;
     public Sprite spriteCerradaDer;
     public Sprite spriteAbiertaDer;
+    public AudioSource audioSource ;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class Puerta2D : MonoBehaviour
     {
         estaAbierta = !estaAbierta;
         ActualizarEstado();
+        SonidoPuerta();
     }
 
  void ActualizarEstado()
@@ -50,4 +52,12 @@ public class Puerta2D : MonoBehaviour
     if (colIzq != null) colIzq.isTrigger = estaAbierta;
     if (colDer != null) colDer.isTrigger = estaAbierta;
 }
+public void SonidoPuerta()
+    {
+        
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+    }
 }

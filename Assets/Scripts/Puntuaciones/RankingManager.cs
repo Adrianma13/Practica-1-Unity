@@ -25,7 +25,7 @@ public class RankingManager : MonoBehaviour
             puntosParaGuardar = Mathf.FloorToInt(PuntuacionManager.instancia.puntosActuales);
             textoPuntosFinales.text = "PUNTOS: " + puntosParaGuardar;
         }
-        if(SceneManager.GetActiveScene().name == "PantallaRecords")
+        if (SceneManager.GetActiveScene().name == "PantallaRecords")
         {
             MostrarRanking();
         }
@@ -72,6 +72,18 @@ public class RankingManager : MonoBehaviour
             }
             textoUiRanking.text = textoRanking;
         }
+    }
+
+
+    public void VolverAlMenu()
+    {
+        StartCoroutine(LoadRankingSceneAfterDelay());
+    }
+
+    private IEnumerator LoadRankingSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene("MenuInicio");
     }
 
 

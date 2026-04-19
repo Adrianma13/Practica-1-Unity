@@ -12,6 +12,7 @@ public class Combate : MonoBehaviour
     private bool yaAtacoEnEsteCiclo = false; // Nueva variable de control
     private Movimiento scriptMovimiento;
     private Animator animator;
+    public AudioSource fuenteAtaque;
 
     private void Start()
     {
@@ -58,7 +59,7 @@ public class Combate : MonoBehaviour
         cronometroAtaque = tiempoEntreAtaques; // Reiniciamos el cronómetro
         scriptMovimiento.puedeMoverse = false; // Bloqueamos movimiento
         animator.SetTrigger("Attack");         // Disparamos animación
-        
+
         // OPCIONAL: Si no usas Animation Events, llama a Atacar() aquí.
         // Pero lo ideal es llamarlo desde la animación (ver abajo).
     }
@@ -75,7 +76,7 @@ public class Combate : MonoBehaviour
         {
             if (collider.CompareTag("Enemigo"))
             {
-                if(collider.TryGetComponent<VidaEnemigo>(out VidaEnemigo enemigo))
+                if (collider.TryGetComponent<VidaEnemigo>(out VidaEnemigo enemigo))
                 {
                     enemigo.RecibirDaño(dañoAtaque);
                     golpeoAlgo = true;
@@ -91,7 +92,7 @@ public class Combate : MonoBehaviour
     // Esta función se llama desde el Animation Event (el último frame)
     public void FinalizarAtaque()
     {
-        scriptMovimiento.puedeMoverse = true; 
+        scriptMovimiento.puedeMoverse = true;
     }
 
     private void OnDrawGizmosSelected()
@@ -99,5 +100,15 @@ public class Combate : MonoBehaviour
         if (controladorAtaque == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(controladorAtaque.position, radioAtaque);
+    }
+
+
+
+    public void EventoAtaque()
+    {
+        if (fuenteAtaque != null)
+        {
+            fuenteAtaque.Play();
+        }
     }
 }
