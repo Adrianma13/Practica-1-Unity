@@ -6,6 +6,8 @@ public class VidaEnemigo : MonoBehaviour
     private float vidaActual;
     private Animator animator;
     private MovimientoEnemigo logicaMovimiento;
+    
+    public TrapTrigger trapTrigger; // Referencia al script de la trampa
 
     void Start()
     {
@@ -19,12 +21,13 @@ public class VidaEnemigo : MonoBehaviour
         //vidaActual = vidaMaxima;
         animator = GetComponent<Animator>();
         logicaMovimiento = GetComponent<MovimientoEnemigo>();
+        
     }
 
     public void RecibirDaño(float cantidad)
     {
         vidaActual -= cantidad;
-        
+        Debug.Log($"Enemigo recibió {cantidad} de daño. Vida actual: {vidaActual}/{vidaMaxima}");
         // Desbloqueamos el movimiento por si el golpe interrumpió un ataque
         if (logicaMovimiento != null) logicaMovimiento.puedeMoverse = true;
 
@@ -45,5 +48,7 @@ public class VidaEnemigo : MonoBehaviour
         // Desactivamos colisiones para que no estorbe el cadáver
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1f);
+        trapTrigger.DesactivarMuro(); // Llamamos a la función para desactivar el muro al morir el enemigo
+      
     }
 }

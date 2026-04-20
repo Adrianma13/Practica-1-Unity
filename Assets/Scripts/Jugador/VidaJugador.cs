@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class VidaJugador : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class VidaJugador : MonoBehaviour
     private Movimiento scriptMovimiento;
 
     [SerializeField] private BarraDeVida barraDeVida;
+    public GameOver panelGameOver;
 
     void Start()
     {
@@ -38,6 +41,7 @@ public class VidaJugador : MonoBehaviour
         {
             barraDeVida.InicializarBarraDeVida(vidaActual, vidaMaxima);
         }
+        panelGameOver = Object.FindAnyObjectByType<GameOver>();
     }
 
     public void TomarDaño(float cantidad)
@@ -97,6 +101,8 @@ public class VidaJugador : MonoBehaviour
         
         LogicaEntreEscenas.instancia.GuardarVida(-1); // Guardamos la vida (0 o negativa) para la próxima escena
         Destroy(gameObject, 1f);
+
+        panelGameOver.MostrarGameOver();
 
     }
 
