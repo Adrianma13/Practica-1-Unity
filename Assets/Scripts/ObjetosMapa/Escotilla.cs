@@ -11,6 +11,7 @@ public class Escotilla : MonoBehaviour
     public Sprite spriteAbierta;
     private SpriteRenderer sr;
     private Collider2D col;
+    private AudioSource audioEscotillaCerrada;
 
     void Start()
     {

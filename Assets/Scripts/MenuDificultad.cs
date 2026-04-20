@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuDificultad : MonoBehaviour
 {
-    [SerializeField] private string nombrePrimeraEscena = "Nivel1"; // Pon el nombre de tu escena aquí
 
     // Estas funciones las asignarás al evento "On Click ()" de cada botón
     public void SeleccionarFacil()
