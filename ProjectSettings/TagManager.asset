@@ -14,6 +14,7 @@ TagManager:
   - Cronometro
   - Puntuacion
   - Musica
+  - Pared
   layers:
   - Default
   - TransparentFX
@@ -56,6 +57,9 @@ TagManager:
     locked: 0
   - name: Mapa
     uniqueID: 318304399
+    locked: 0
+  - name: Bordes
+    uniqueID: 1766076773
     locked: 0
   - name: Detalles Mapeado
     uniqueID: 2750654569

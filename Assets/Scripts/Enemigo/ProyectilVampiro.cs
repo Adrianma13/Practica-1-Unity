@@ -24,5 +24,9 @@ public class ProyectilJefe : MonoBehaviour
             collision.GetComponent<VidaJugador>().TomarDaño(daño);
             Destroy(gameObject);
         }
+        else if (collision.CompareTag("Pared"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VidaEnemigo : MonoBehaviour
 {
@@ -48,7 +49,8 @@ public class VidaEnemigo : MonoBehaviour
         // Desactivamos colisiones para que no estorbe el cadáver
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1f);
-        trapTrigger.DesactivarMuro(); // Llamamos a la función para desactivar el muro al morir el enemigo
+        if(SceneManager.GetActiveScene().name == "Pantalla Jefe")
+            trapTrigger.DesactivarMuro(); // Llamamos a la función para desactivar el muro al morir el enemigo
       
     }
 }
