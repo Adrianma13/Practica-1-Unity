@@ -12,7 +12,9 @@ public class Combate : MonoBehaviour
     private bool yaAtacoEnEsteCiclo = false; // Nueva variable de control
     private Movimiento scriptMovimiento;
     private Animator animator;
-    public AudioSource fuenteAtaque;
+
+
+    public EntityAudioManager audioManager ;
 
     private void Start()
     {
@@ -51,6 +53,7 @@ public class Combate : MonoBehaviour
             if (!scriptMovimiento.puedeMoverse || cronometroAtaque > 0) return;
             yaAtacoEnEsteCiclo = false; // Reiniciamos el control para este nuevo ataque
             IniciarAtaque();
+
         }
     }
 
@@ -58,8 +61,12 @@ public class Combate : MonoBehaviour
     {
         cronometroAtaque = tiempoEntreAtaques; // Reiniciamos el cronómetro
         scriptMovimiento.puedeMoverse = false; // Bloqueamos movimiento
-        animator.SetTrigger("Attack");  
-         fuenteAtaque.Play();       // Disparamos animación
+        animator.SetTrigger("Attack");
+
+        if (audioManager != null)
+        {
+            audioManager.PlayAttackSound();
+        }
 
         // OPCIONAL: Si no usas Animation Events, llama a Atacar() aquí.
         // Pero lo ideal es llamarlo desde la animación (ver abajo).
@@ -105,5 +112,5 @@ public class Combate : MonoBehaviour
 
 
 
-  
+
 }

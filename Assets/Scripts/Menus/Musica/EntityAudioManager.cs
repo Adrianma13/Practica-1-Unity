@@ -16,6 +16,10 @@ public class EntityAudioManager : MonoBehaviour
     public void PlayAttackSound() {
         PlaySound(clipAtaque);
     }
+     public void PlayStepsSound() {
+        PlaySound(clipPasos);
+    }
+
 
     public void PlayHitSound() {
         PlaySound(clipHit);

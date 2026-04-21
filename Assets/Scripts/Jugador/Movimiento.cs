@@ -11,7 +11,7 @@ public class Movimiento : MonoBehaviour
     private Animator animator;
     public Vector2 direccionMirado { get; private set; } // Nueva variable accesible
     [HideInInspector] public bool puedeMoverse = true;
-
+    public EntityAudioManager audioManager ;
 
     void Start()
     {
@@ -77,10 +77,11 @@ public class Movimiento : MonoBehaviour
     }
     public void ReproducirPaso()
     {
-        AudioSource source = GetComponent<AudioSource>();
-        // Añadimos un poco de variación de tono para que no sea monótono
-        source.pitch = Random.Range(0.8f, 1.2f);
-        source.Play();
+        
+        if (audioManager != null)
+        {
+            audioManager.PlayStepsSound();
+        }
     }
 
 }

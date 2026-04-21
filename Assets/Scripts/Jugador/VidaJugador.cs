@@ -16,6 +16,7 @@ public class VidaJugador : MonoBehaviour
 
     [SerializeField] private BarraDeVida barraDeVida;
     public GameOver panelGameOver;
+    public EntityAudioManager audioManager ;
 
     void Start()
     {
@@ -72,6 +73,10 @@ public class VidaJugador : MonoBehaviour
         {
             animator.SetTrigger("Hit");
         }
+         if (audioManager != null)
+        {
+            audioManager.PlayHitSound();
+        }
 
         StartCoroutine(InvulnerabilidadPostGolpe());
     }
@@ -103,6 +108,11 @@ public class VidaJugador : MonoBehaviour
         Destroy(gameObject, 1f);
 
         panelGameOver.MostrarGameOver();
+      
+        if (audioManager != null)
+        {
+            audioManager.PlayDeathSound();
+        }
 
     }
 
