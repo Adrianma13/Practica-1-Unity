@@ -11,7 +11,8 @@ public class Escotilla : MonoBehaviour
     public Sprite spriteAbierta;
     private SpriteRenderer sr;
     private Collider2D col;
-    private AudioSource audioEscotillaCerrada;
+    public AudioSource audioEscotillaCerrada;
+    public AudioSource audioEscotillaAbierta;
 
     void Start()
     {
@@ -31,10 +32,12 @@ public class Escotilla : MonoBehaviour
         {
             estaAbierta = true;
             ActualizarVisual();
+            audioEscotillaAbierta.Play();
             Debug.Log("Escotilla abierta con " + llaveNecesaria);
         }
         else
         {
+            audioEscotillaCerrada.Play();
             Debug.Log("Necesitas la " + llaveNecesaria);
         }
     }

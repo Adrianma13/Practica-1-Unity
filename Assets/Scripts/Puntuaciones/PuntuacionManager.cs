@@ -7,7 +7,7 @@ public class PuntuacionManager : MonoBehaviour
 {
     public static PuntuacionManager instancia;
 
-    public float puntosActuales = 100f;
+    public float puntosActuales = 101f;
     public TextMeshProUGUI textoPuntos;
 
     void Awake()

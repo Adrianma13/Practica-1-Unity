@@ -114,8 +114,17 @@ public class VidaJugador : MonoBehaviour
             audioManager.PlayDeathSound();
         }
 
-    }
+        
 
+    }
+public void setVidaMaxima(float nuevaVidaMaxima)
+    {
+
+        vidaMaxima = vidaMaxima + nuevaVidaMaxima; // Aumentamos la vida máxima
+        vidaActual = vidaActual + nuevaVidaMaxima; // Restauramos la vida al máximo
+        barraDeVida.InicializarBarraDeVida(vidaActual, vidaMaxima);
+      
+    }
     
 
 }

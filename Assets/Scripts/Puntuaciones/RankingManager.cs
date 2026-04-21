@@ -23,7 +23,7 @@ public class RankingManager : MonoBehaviour
         if (PuntuacionManager.instancia != null)
         {
             puntosParaGuardar = Mathf.FloorToInt(PuntuacionManager.instancia.puntosActuales);
-            textoPuntosFinales.text = "PUNTOS: " + puntosParaGuardar;
+            textoPuntosFinales.text = "" + puntosParaGuardar;
         }
         if (SceneManager.GetActiveScene().name == "PantallaRecords")
         {

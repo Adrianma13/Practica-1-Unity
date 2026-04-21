@@ -8,13 +8,14 @@ public class VidaEnemigo : MonoBehaviour
     private float vidaActual;
     private Animator animator;
     private MovimientoEnemigo logicaMovimiento;
-    
+
     public TrapTrigger trapTrigger; // Referencia al script de la trampa
 
     [Header("Efecto Visual de Daño")]
     [SerializeField] private Color colorDaño = Color.red; // Color al recibir el golpe
     private SpriteRenderer spriteRenderer;
     private Color colorOriginal;
+    public EntityAudioManager audioManager;
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class VidaEnemigo : MonoBehaviour
         {
             colorOriginal = spriteRenderer.color;
         }
-        
+
     }
 
     public void RecibirDaño(float cantidad)
@@ -47,8 +48,14 @@ public class VidaEnemigo : MonoBehaviour
 
         if (spriteRenderer != null)
         {
+            if (audioManager != null)
+            {
+                audioManager.PlayHitSound();
+            }
             StartCoroutine(EfectoParpadeo());
         }
+
+
 
         if (vidaActual <= 0)
         {
@@ -60,18 +67,23 @@ public class VidaEnemigo : MonoBehaviour
     {
         PuntuacionManager.instancia.ModificarPuntos(50f); // Recompensa por matar al enemigo
         if (logicaMovimiento != null) logicaMovimiento.enabled = false;
+        if (audioManager != null)
+        {
+            audioManager.PlayDeathSound();
+        }
         if (animator != null) animator.SetTrigger("Death");
         if (TryGetComponent<Collider2D>(out Collider2D col))
         {
             col.enabled = false;
         }
-        
+
         // Desactivamos colisiones para que no estorbe el cadáver
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 1f);
-        if(SceneManager.GetActiveScene().name == "Pantalla Jefe")
+        if (SceneManager.GetActiveScene().name == "Pantalla Jefe")
             trapTrigger.DesactivarMuro(); // Llamamos a la función para desactivar el muro al morir el enemigo
-      
+        Destroy(gameObject, 1f);
+        
+
     }
 
     // Esta corrutina se ejecuta en segundo plano sin detener el juego
@@ -79,10 +91,10 @@ public class VidaEnemigo : MonoBehaviour
     {
         // Cambiamos al color de daño
         spriteRenderer.color = colorDaño;
-        
+
         // Esperamos 0.1 segundos (puedes ajustar este valor)
         yield return new WaitForSeconds(0.2f);
-        
+
         // Volvemos al color normal
         spriteRenderer.color = colorOriginal;
     }

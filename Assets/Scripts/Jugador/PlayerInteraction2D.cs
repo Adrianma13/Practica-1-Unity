@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteraction2D : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerInteraction2D : MonoBehaviour
 
     private Animator animator;
 
+    private Combate combateScript;
+    private VidaJugador vidaScript;
+
     void Awake()
     {
         // Obtenemos el componente Animator del jugador
@@ -25,6 +29,8 @@ public class PlayerInteraction2D : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        combateScript = GetComponent<Combate>();
+        vidaScript = GetComponent<VidaJugador>();
         CargarArmaduraDesdeManager();
     }
     void Update()
@@ -85,10 +91,13 @@ public class PlayerInteraction2D : MonoBehaviour
         Debug.Log("Inventario: Has obtenido " + nombreObjeto);
         if (nombreObjeto == "Armadura1")
         {
+
             EquiparNuevaArmadura(1);
         }
         if (nombreObjeto == "Armadura2")
         {
+
+
             EquiparNuevaArmadura(2);
         }
     }
@@ -104,8 +113,28 @@ public class PlayerInteraction2D : MonoBehaviour
 
         int id = LogicaEntreEscenas.instancia.idArmadura1Guardada;
 
-        if (id == 1) animator.runtimeAnimatorController = controladorConArmadura;
-        else if (id == 2) animator.runtimeAnimatorController = controladorConArmadura2;
+        if (id == 1)
+        {
+            combateScript.setDaño(25f);
+            vidaScript.setVidaMaxima(50f);
+            animator.runtimeAnimatorController = controladorConArmadura;
+
+        }
+        else if (id == 2)
+        {
+
+            animator.runtimeAnimatorController = controladorConArmadura2;
+            if(SceneManager.GetActiveScene().name == "Planta Intermedia")
+            {
+                combateScript.setDaño(40f);
+                vidaScript.setVidaMaxima(100f);
+            }
+             else
+            {
+                combateScript.setDaño(40f);
+                vidaScript.setVidaMaxima(150f);
+            }
+        }
         // Si es 0, se queda con el animator normal por defecto
     }
     public void EquiparNuevaArmadura(int nuevoId)

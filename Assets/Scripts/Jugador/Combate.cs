@@ -20,6 +20,7 @@ public class Combate : MonoBehaviour
     {
         scriptMovimiento = GetComponent<Movimiento>();
         animator = GetComponent<Animator>();
+        
     }
 
     private void Update()
@@ -110,7 +111,10 @@ public class Combate : MonoBehaviour
         Gizmos.DrawWireSphere(controladorAtaque.position, radioAtaque);
     }
 
-
+    public void setDaño(float nuevoDaño)
+    {
+        dañoAtaque = nuevoDaño;
+    }
 
 
 }

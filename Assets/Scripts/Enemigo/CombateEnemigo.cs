@@ -16,6 +16,7 @@ public class CombateEnemigo : MonoBehaviour
     protected Animator animator;
     protected MovimientoEnemigo logicaMovimiento;
     protected Transform jugador;
+    public EntityAudioManager audioManager ;
 
     protected virtual void Start()
     {
@@ -59,6 +60,10 @@ public class CombateEnemigo : MonoBehaviour
             cronometroAtaque = tiempoEntreAtaques;
             logicaMovimiento.puedeMoverse = false; 
             animator.SetTrigger("Attack");
+             if (audioManager != null)
+                {
+                    audioManager.PlayAttackSound();
+                }
         }
     }
 
@@ -70,7 +75,8 @@ public class CombateEnemigo : MonoBehaviour
         {
             if (hit.TryGetComponent<VidaJugador>(out VidaJugador vida))
             {
-                
+             
+
                 vida.TomarDaño(daño);
             }
         }
