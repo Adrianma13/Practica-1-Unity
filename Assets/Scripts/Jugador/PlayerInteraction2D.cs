@@ -75,7 +75,7 @@ public class PlayerInteraction2D : MonoBehaviour
         }
     }
 
-    // Esto es para que puedas ver el círculo en el Editor de Unity
+   
     private void OnDrawGizmosSelected()
     {
         if (puntoInteraccion != null)
@@ -102,7 +102,7 @@ public class PlayerInteraction2D : MonoBehaviour
         }
     }
 
-    // Función para consultar si tenemos algo (útil para puertas con llave)
+    // Función para consultar si tenemos algo 
     public bool TieneObjeto(string nombreObjeto)
     {
         return inventario.Contains(nombreObjeto);

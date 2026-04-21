@@ -93,7 +93,7 @@ public class Pause : MonoBehaviour
             if (anim == null) return;
         }
 
-        // VERIFICACIÓN CLAVE: Si el animator no tiene el archivo Controller asignado, salimos para evitar el error
+        // Si el animator no tiene el archivo Controller asignado, salimos para evitar el error
         if (anim.runtimeAnimatorController == null)
         {
             Debug.LogError("El Animator en " + anim.gameObject.name + " no tiene un Animator Controller asignado en el Inspector.");

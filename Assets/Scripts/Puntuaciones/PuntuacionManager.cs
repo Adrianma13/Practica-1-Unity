@@ -23,7 +23,7 @@ public class PuntuacionManager : MonoBehaviour
         }
     }
 
-    // Función universal para añadir o quitar puntos
+  
     public void ModificarPuntos(float cantidad)
     {
         puntosActuales += cantidad;

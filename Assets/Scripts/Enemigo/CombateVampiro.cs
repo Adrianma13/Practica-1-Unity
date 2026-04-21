@@ -8,14 +8,13 @@ public class CombateVampiro : CombateEnemigo
     [SerializeField] private int cantidadProyectiles = 5;
     [SerializeField] private float anguloApertura = 60f;
 
-    // Nuestro candado de seguridad
+  
     private bool yaDisparo = false; 
 
     protected override void Update()
     {
         base.Update(); // Ejecuta el cronómetro del script padre
 
-        // Si el vampiro puede moverse (es decir, no está atacando), quitamos el candado
         if (logicaMovimiento.puedeMoverse)
         {
             yaDisparo = false;
@@ -24,10 +23,10 @@ public class CombateVampiro : CombateEnemigo
 
     public override void EjecutarDaño() 
     {
-        // Si el candado está cerrado, cancelamos la función instantáneamente
+        
         if (yaDisparo) return; 
         
-        // Cerramos el candado para que no se repita en esta animación
+     
         yaDisparo = true; 
 
         if (jugador == null || prefabProyectil == null || puntoDisparo == null) return;

@@ -23,7 +23,6 @@ public class Cofre : MonoBehaviour
             PuntuacionManager.instancia.ModificarPuntos(20f); // Recompensa por abrir el cofre
             estaAbierto = true;
             audioSource.Play();
-            // Le damos al jugador el string que hayamos escrito en el Inspector
             jugador.RecogerObjeto(objetoContenido);
             
             ActualizarVisual();

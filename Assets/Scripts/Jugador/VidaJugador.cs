@@ -58,7 +58,7 @@ public class VidaJugador : MonoBehaviour
         // Actualizar UI
         if (barraDeVida != null) barraDeVida.CambiarVidaActual(vidaActual);
 
-        // 3. ¡IMPORTANTE! Guardar el cambio en el almacén inmediatamente
+        
         LogicaEntreEscenas.instancia.GuardarVida(vidaActual);
         Debug.Log(gameObject.name + " recibió daño. Vida restante: " + vidaActual);
 
@@ -84,7 +84,7 @@ public class VidaJugador : MonoBehaviour
     private IEnumerator InvulnerabilidadPostGolpe()
     {
         esInvulnerable = true;
-        // Opcional: podrías hacer que el sprite parpadee aquí
+   
         yield return new WaitForSeconds(tiempoInvulnerabilidad);
         esInvulnerable = false;
     }

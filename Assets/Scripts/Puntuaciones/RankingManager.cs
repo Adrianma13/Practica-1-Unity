@@ -44,17 +44,16 @@ public class RankingManager : MonoBehaviour
             miRanking = JsonUtility.FromJson<ListaRanking>(json);
         }
 
-        // 2. Añadir nueva entrada
+       
         miRanking.lista.Add(new EntradaRanking { nombre = nombreJugador, puntos = puntosParaGuardar });
 
-        // 3. Ordenar por puntos (de mayor a menor) y quedarse con los 10 mejores
+       
         miRanking.lista = miRanking.lista.OrderByDescending(x => x.puntos).Take(10).ToList();
 
-        // 4. Guardar en el disco duro
+       
         string nuevoJson = JsonUtility.ToJson(miRanking);
         File.WriteAllText(rutaArchivo, nuevoJson);
 
-        // 5. Volver al menú
         SceneManager.LoadScene("MenuInicio");
     }
     public void MostrarRanking()

@@ -72,7 +72,7 @@ public class Movimiento : MonoBehaviour
     public void ForzarDesbloqueo()
     {
         puedeMoverse = true;
-        // Opcional: reiniciar triggers si es necesario
+   
         animator.ResetTrigger("Attack");
     }
     public void ReproducirPaso()

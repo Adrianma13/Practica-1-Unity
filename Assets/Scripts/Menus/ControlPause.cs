@@ -7,7 +7,7 @@ public class ControlPause : MonoBehaviour
 
     void Awake()
     {
-        // 1. Verificamos si ya existe una instancia de este menú
+        // Verificamos si ya existe una instancia de este menú
         if (instancia == null)
         {
             // Si es el primero, lo guardamos y le decimos que no se destruya
@@ -16,7 +16,7 @@ public class ControlPause : MonoBehaviour
         }
         else
         {
-            // 2. Si ya existe uno (el que venía de la escena anterior), 
+            // Si ya existe uno (el que venía de la escena anterior), 
             // destruimos el nuevo que acaba de aparecer en esta escena.
             Debug.Log("Menú duplicado detectado, destruyendo...");
             Destroy(gameObject);

@@ -7,13 +7,13 @@ public class DestruirEnEscena : MonoBehaviour
 
     void OnEnable()
     {
-        // Nos suscribimos al evento de escena cargada
+       
         SceneManager.sceneLoaded += AlCargarEscena;
     }
 
     void OnDisable()
     {
-        // Siempre nos desuscribimos al desactivar para evitar errores de memoria
+    
         SceneManager.sceneLoaded -= AlCargarEscena;
     }
 

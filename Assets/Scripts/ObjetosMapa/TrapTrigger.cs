@@ -30,7 +30,6 @@ public class TrapTrigger : MonoBehaviour
             if (seActivaSoloUnaVez)
             {
                 yaActivado = true;
-                // Opcional: destroy(gameObject); // Si quieres borrar el sensor para siempre
             }
         }
     }

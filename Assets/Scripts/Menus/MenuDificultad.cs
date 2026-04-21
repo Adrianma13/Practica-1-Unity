@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class MenuDificultad : MonoBehaviour
 {
 
-    // Estas funciones las asignarás al evento "On Click ()" de cada botón
+  
     public void SeleccionarFacil()
     {
         IniciarJuegoConDificultad(0.75f);

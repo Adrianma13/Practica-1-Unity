@@ -43,7 +43,7 @@ public class Combate : MonoBehaviour
         }
     }
 
-    // ESTA ES LA FUNCIÓN QUE DEBES VINCULAR EN EL PLAYER INPUT COMPONENT
+   
     public void Attack(InputAction.CallbackContext context)
     {
 
@@ -69,8 +69,7 @@ public class Combate : MonoBehaviour
             audioManager.PlayAttackSound();
         }
 
-        // OPCIONAL: Si no usas Animation Events, llama a Atacar() aquí.
-        // Pero lo ideal es llamarlo desde la animación (ver abajo).
+        
     }
 
     // Esta función se llama desde el Animation Event (el frame del golpe)

@@ -5,7 +5,7 @@ using TMPro; // Si usas TextMeshPro (recomendado)
 
 public class Cronometro : MonoBehaviour
 {
-    public static Cronometro instancia; // Esto permite que otros scripts lean el tiempo fácilmente
+    public static Cronometro instancia; 
     
     public float tiempoTranscurrido = 0f;
     public bool cronometroActivo = false;

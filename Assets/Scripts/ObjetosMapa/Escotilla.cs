@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement; // ¡IMPORTANTE! Necesario para cambiar de es
 public class Escotilla : MonoBehaviour
 {
     public bool estaAbierta = false;
-    public string llaveNecesaria = "LlaveEscotilla"; // Debe coincidir con el nombre de la llave
-    public string nombreEscenaDestino; // Escribe aquí el nombre de la escena en el Inspector
+    public string llaveNecesaria = "LlaveEscotilla"; 
+    public string nombreEscenaDestino;
 
     public Sprite spriteCerrada;
     public Sprite spriteAbierta;
@@ -27,7 +27,7 @@ public class Escotilla : MonoBehaviour
         {
             ViajarALaSiguienteEscena();
         }
-        // CAMBIO AQUÍ: Consultamos la lista del inventario
+      
         else if (jugador.TieneObjeto(llaveNecesaria))
         {
             estaAbierta = true;

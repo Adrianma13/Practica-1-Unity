@@ -10,7 +10,7 @@ public class GameOver : MonoBehaviour
     {
         if (panelGameOver != null)
         {
-            panelGameOver.SetActive(false); // Asegúrate de que el panel esté oculto al inicio
+            panelGameOver.SetActive(false); 
         }
     }
     public void MostrarGameOver()

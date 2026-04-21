@@ -39,13 +39,9 @@ public class Puerta2D : MonoBehaviour
     if (hojaDerecha != null) 
         hojaDerecha.sprite = estaAbierta ? spriteAbiertaDer : spriteCerradaDer;
     
-    // 2. HACER QUE SE PUEDA PASAR
-    // Primero: El collider del PADRE (el que detecta la E)
-    // Lo ponemos como trigger para que no choque con el cuerpo del jugador
     if (GetComponent<Collider2D>() != null)
         GetComponent<Collider2D>().isTrigger = estaAbierta;
 
-    // Segundo: Los colliders de las HOJAS
     Collider2D colIzq = hojaIzquierda.GetComponent<Collider2D>();
     Collider2D colDer = hojaDerecha.GetComponent<Collider2D>();
 
