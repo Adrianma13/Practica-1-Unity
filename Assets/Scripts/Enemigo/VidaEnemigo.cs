@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,11 @@ public class VidaEnemigo : MonoBehaviour
     private MovimientoEnemigo logicaMovimiento;
     
     public TrapTrigger trapTrigger; // Referencia al script de la trampa
+
+    [Header("Efecto Visual de Daño")]
+    [SerializeField] private Color colorDaño = Color.red; // Color al recibir el golpe
+    private SpriteRenderer spriteRenderer;
+    private Color colorOriginal;
 
     void Start()
     {
@@ -22,6 +28,13 @@ public class VidaEnemigo : MonoBehaviour
         //vidaActual = vidaMaxima;
         animator = GetComponent<Animator>();
         logicaMovimiento = GetComponent<MovimientoEnemigo>();
+
+        // Guardamos la referencia a la imagen y su color original (normalmente blanco)
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            colorOriginal = spriteRenderer.color;
+        }
         
     }
 
@@ -32,8 +45,15 @@ public class VidaEnemigo : MonoBehaviour
         // Desbloqueamos el movimiento por si el golpe interrumpió un ataque
         if (logicaMovimiento != null) logicaMovimiento.puedeMoverse = true;
 
-        if (vidaActual <= 0) Morir();
-        else if (animator != null) animator.SetTrigger("Hit");
+        if (spriteRenderer != null)
+        {
+            StartCoroutine(EfectoParpadeo());
+        }
+
+        if (vidaActual <= 0)
+        {
+            Morir();
+        }
     }
 
     private void Morir()
@@ -52,5 +72,18 @@ public class VidaEnemigo : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Pantalla Jefe")
             trapTrigger.DesactivarMuro(); // Llamamos a la función para desactivar el muro al morir el enemigo
       
+    }
+
+    // Esta corrutina se ejecuta en segundo plano sin detener el juego
+    private IEnumerator EfectoParpadeo()
+    {
+        // Cambiamos al color de daño
+        spriteRenderer.color = colorDaño;
+        
+        // Esperamos 0.1 segundos (puedes ajustar este valor)
+        yield return new WaitForSeconds(0.2f);
+        
+        // Volvemos al color normal
+        spriteRenderer.color = colorOriginal;
     }
 }
