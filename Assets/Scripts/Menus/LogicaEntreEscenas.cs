@@ -29,10 +29,12 @@ public class LogicaEntreEscenas : MonoBehaviour
     public void ValoresPorDefecto()
     {
 
-        vidaGuardada = -1; // Reiniciamos la vida guardada al volver al menú principal
-        idArmadura1Guardada = 0; // Reiniciamos el estado del armadura al volver al menú principal
-        multiplicadorDificultad = 1f; // Reiniciamos la dificultad al volver al menú principal
-
+       if(SceneManager.GetActiveScene().name == "ConfigNivel")
+        {
+            vidaGuardada = -1; // Reiniciamos la vida guardada al volver al menú principal
+            idArmadura1Guardada = 0; // Reiniciamos el estado del armadura al volver al menú principal
+            multiplicadorDificultad = 1f; // Reiniciamos la dificultad al volver al menú principal
+        }
 
     }
     public void GuardarVida(float vida)

@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
 
 public class VidaJugador : MonoBehaviour
 {
     [Header("Estadísticas")]
-    [SerializeField] private float vidaMaxima = 100f;
+    private float vidaMaxima = 100f;
     private float vidaActual;
 
     private Animator animator;
@@ -17,6 +17,7 @@ public class VidaJugador : MonoBehaviour
     [SerializeField] private BarraDeVida barraDeVida;
     public GameOver panelGameOver;
     public EntityAudioManager audioManager ;
+    
 
     void Start()
     {
@@ -30,7 +31,8 @@ public class VidaJugador : MonoBehaviour
 
         if (vidaPrevia == -1) // Es la primera escena o no hay datos
         {
-            vidaActual = vidaMaxima;
+          vidaActual = vidaMaxima; // Empezamos con la vida máxima
+          
         }
         else
         {
